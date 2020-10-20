@@ -1,5 +1,4 @@
 global _ft_strdup
-extern ___error
 extern _malloc
 extern _ft_strlen
 extern _ft_strcpy
@@ -16,19 +15,13 @@ _ft_strdup:
     inc rdi
     call _malloc
     cmp rax, 0
-    je error
+    je exit         ;просто возвращаю 0, так как malloc сам работает с errno - указано в документации
     jmp copy
 copy:
     pop rsi
     mov rdi, rax
     call _ft_strcpy
     jmp exit
-error:
-    mov rbx, rax
-    call ___error
-    mov [rax], rbx
-    mov rax, -1
-    ret
 exit:
     ret
 
