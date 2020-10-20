@@ -1,15 +1,15 @@
-global _ft_strlen
+    global _ft_strlen
 
-section .text
+    section .text
 
 _ft_strlen:
-     mov rcx, -1
+     xor rcx, rcx                ;int i = 0
      jmp count
 count:
-     inc rcx
-     cmp [rdi + rcx], byte 0 
-     jne count
-     jmp exit
+     cmp [rdi + rcx], byte 0    ;if (*str == '\0')
+     je exit                    ;if (*str == '\0') => return i
+     inc rcx                    ;i++;
+     jmp count
 exit:
      mov rax, rcx
      ret

@@ -20,8 +20,7 @@ HEADER = libasm.h
 TEST_DIR = test/
 TEST_FILE = main.c
 
-SRC_DIR = srcs/
-SRC = ft_strlen.s
+SRC = srcs/ft_strlen.s srcs/ft_strcmp.s srcs/ft_write.s srcs/ft_read.s srcs/ft_strcpy.s srcs/ft_strdup.s
 
 OBJECTS = $(SRC:.s=.o)
 
@@ -30,12 +29,12 @@ all:$(NAME)
 %.o: %.s $(HEADER)
 	$(NASM) -I . -s $< -o $@
 
-$(NAME): $(SRC_DIR)$(OBJECTS)
+$(NAME): $(OBJECTS)
 	ar rc $(NAME) $?
 	ranlib $(NAME)
 
 clean:
-	rm -f $(SRC_DIR)$(OBJECTS)
+	rm -f $(OBJECTS)
 
 fclean: clean
 	rm -f $(NAME)
@@ -45,6 +44,6 @@ re: fclean all
 test:
 	$(CC) $(FLAGS) -L. -lasm $(TEST_DIR)$(TEST_FILE)
 	./a.out
-	@rm -rf a.out
+	rm -rf a.out
 
 .PHONY: all clean fclean re test
