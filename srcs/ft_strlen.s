@@ -1,6 +1,6 @@
-    global _ft_strlen
+global _ft_strlen
 
-    section .text
+section .text
 
 _ft_strlen:
      xor rcx, rcx                ;int i = 0
